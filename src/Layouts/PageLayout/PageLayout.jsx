@@ -1,4 +1,4 @@
-import { Flex, Box, calc, Spinner } from '@chakra-ui/react'
+import { Flex, Box, Spinner } from '@chakra-ui/react'
 import React from 'react'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import { useLocation } from 'react-router-dom'
@@ -9,6 +9,7 @@ import Navbar from '../../components/Navbar/Navbar';
 function PageLayout({children}) {
     const {pathname} = useLocation();
     const [user, loading, error] = useAuthState(auth);
+    
     const canRenderSidebar = pathname !== '/auth' && user;
     const canRenderNavbar = !user && !loading && pathname !== '/auth';
     const checkUserIsAuth = !user && loading;

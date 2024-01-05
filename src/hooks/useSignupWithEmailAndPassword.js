@@ -46,7 +46,8 @@ function useSignupWithEmailAndPassword() {
             loginUser(userDoc);
            }
         } catch (error) {
-            console.log(error);
+            showToast("Error",error.message, "error");
+            return;
         }
     }
 

@@ -28,6 +28,7 @@ function AuthForm() {
                 <Text mx={1} color={"white"}>OR</Text>
                 <Box flex={2} h={"1px"} bg={"gray.400"}/>
             </Flex>
+            
             <GoogleAuth prefix={isLogin? "Log in": "Sign up"}/>
             <Box border={"1px solid gray"} borderRadius={4} padding={3}>
                 <Flex alignItems={"center"} justifyContent={"center"}>

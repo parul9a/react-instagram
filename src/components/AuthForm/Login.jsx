@@ -6,7 +6,6 @@ function Login() {
     const [inputs, setInputs] = useState({
         email:'',
         password: '',
-        confirmPassword: ''
     })
     const {login, loading, error} = useLogin();
   return (

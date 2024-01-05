@@ -17,6 +17,7 @@ function useEditProfile() {
         if(isUpdating && !authUser) return;
         setIsUpdating(true);
 
+        // Create Storage for profile pics for every userId
         const storageRef = ref(storage, `profilePics/${authUser.uid}`);
         const userDocRef = doc(fireStore, 'users', authUser.uid);
         

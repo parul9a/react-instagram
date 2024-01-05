@@ -11,6 +11,7 @@ export default function ProfilePage() {
   const {username} = useParams();
   const {isLoading, userProfile} = useGetProfileByUsername(username);
   
+  
   const userNotFound = !isLoading || !userProfile;
   if(userNotFound){
     <UserNotFound />

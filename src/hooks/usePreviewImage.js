@@ -8,6 +8,7 @@ function usePreviewImage() {
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
+    // Check if file has Image format only
     if(file && file.type.startsWith("image/")){
         if(file.size > maxSizeBytes){
             showToast("Error", "Please select Image less than 2MB", "error");
@@ -15,7 +16,7 @@ function usePreviewImage() {
             return;
         }
         const reader = new FileReader();
-        console.log(reader);
+        
         reader.onloadend = () => {
             setSelectedFile(reader.result);
         }
