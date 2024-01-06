@@ -75,10 +75,7 @@ function useFollowUser(userId) {
     useEffect(()=>{
         if(authUser){
             // Check if authenticated user is following that profile user or not
-            console.log(authUser.following);
-            console.log("userId: ", userId);
             const isFollowing = authUser.following.includes(userId);
-            console.log("isFollowing ", isFollowing);
             setIsFollowing(isFollowing)
         }
 
