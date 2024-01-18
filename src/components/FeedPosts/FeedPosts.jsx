@@ -1,41 +1,48 @@
-import { Container, Skeleton, SkeletonCircle, VStack, Flex, Box } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
-import FeedPost from './FeedPost'
+import {
+  Container,
+  Skeleton,
+  SkeletonCircle,
+  VStack,
+  Flex,
+  Box,
+  Text,
+} from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import FeedPost from "./FeedPost";
+import useGetFeedPost from "../../hooks/useGetFeedPost";
 
 function FeedPosts() {
-    const [loading, setLoading] = useState(true);
-    useEffect(()=> {
-        setTimeout(() => {
-            setLoading(false);
-        }, 2000);
-    })
+  const { isLoading, posts } = useGetFeedPost();
+
   return (
     <Container maxW={"container.sm"} py={10} px={2}>
-        {loading && [0,1,2,3].map((_,index)=> (
-            <VStack key={index} gap={4} alignItems={"flex-start"} mb={10}>
-                <Flex gap={2}>
-                    <SkeletonCircle size={10}></SkeletonCircle>
-                    <VStack>
-                        <Skeleton height={'10px'} w={'200px'}></Skeleton>
-                        <Skeleton height={'10px'} w={'200px'}></Skeleton>
-                    </VStack>
-                </Flex>
-                <Skeleton w={"full"}>
-                    <Box h={'500px'}>Content Wrapped</Box>
-                </Skeleton>
-            </VStack>
+      {isLoading &&
+        [0, 1, 2, 3].map((_, index) => (
+          <VStack key={index} gap={4} alignItems={"flex-start"} mb={10}>
+            <Flex gap={2}>
+              <SkeletonCircle size={10}></SkeletonCircle>
+              <VStack>
+                <Skeleton height={"10px"} w={"200px"}></Skeleton>
+                <Skeleton height={"10px"} w={"200px"}></Skeleton>
+              </VStack>
+            </Flex>
+            <Skeleton w={"full"}>
+              <Box h={"500px"}>Content Wrapped</Box>
+            </Skeleton>
+          </VStack>
         ))}
-        {!loading && (
-            <>
-                <FeedPost img='/img1.png' username='testing' avatar='/img1.png'/>
-                <FeedPost img='/img2.png' username='testing' avatar='/img2.png'/>
-                <FeedPost img='/img3.png' username='testing' avatar='/img3.png'/>
-                <FeedPost img='/img4.png' username='testing' avatar='/img4.png'/>
-            </>
-        )}
-        
+      {!isLoading &&
+        posts.length > 0 &&
+        posts.map((post) => <FeedPost key={post.id} post={post} />)}
+      {!isLoading && posts.length === 0 && (
+        <>
+          <Text fontSize={"md"} color={"red.400"}>
+            Looks Like you don't have any new posts
+          </Text>
+        </>
+      )}
     </Container>
-  )
+  );
 }
 
-export default FeedPosts
+export default FeedPosts;
